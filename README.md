@@ -1,4 +1,4 @@
-# {{ NAME }}
+# Base64
 
 {{ DESCRIPTION }}
 
@@ -12,8 +12,8 @@ This uses the following external resources:
 To install the module from the PowerShell Gallery, you can use the following command:
 
 ```powershell
-Install-PSResource -Name {{ NAME }}
-Import-Module -Name {{ NAME }}
+Install-PSResource -Name Base64
+Import-Module -Name Base64
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ Hello, World!
 Provide examples for typical commands that a user would like to do with the module.
 
 ```powershell
-Import-Module -Name PSModuleTemplate
+Import-Module -Name Base64
 ```
 
 ### Find more examples

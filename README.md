@@ -43,6 +43,24 @@ Encode a plain text string into its base64 representation:
 SGVsbG8gV29ybGQ=
 ```
 
+### Convert a File to base64
+
+Encode a plain text file into its base64 representation:
+
+```text
+123
+456
+```
+
+```powershell
+Get-Content file.txt | ConvertTo-Base64
+```
+
+**Expected Output:**
+```powershell
+MTIzCjQ1Ng==
+```
+
 ### Decode a base64 String
 
 Convert a base64 encoded string back to its original human-readable format:

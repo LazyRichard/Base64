@@ -15,6 +15,22 @@
         It "'Hello World' | ConvertTo-Base64 -> SGVsbG8gV29ybGQ=" {
             'Hello World' | ConvertTo-Base64 | Should -Be 'SGVsbG8gV29ybGQ='
         }
+
+        It "@('123', '456') | ConvertTo-Base64 -> MTIzDQo0NTY=" -Skip:(!$IsWindows) {
+            @('123', '456') | ConvertTo-Base64 | Should -Be 'MTIzDQo0NTY='
+        }
+
+        It "@('123', '456') | ConvertTo-Base64 -> MTIzCjQ1Ng==" -Skip:(!$IsLinux) {
+            @('123', '456') | ConvertTo-Base64 | Should -Be 'MTIzCjQ1Ng=='
+        }
+
+        It "Get-Content tests/sample.txt | ConvertTo-Base64 -> Get-Content tests/sample-encoded-windows.txt" -Skip:(!$IsWindows) {
+            Get-Content tests/sample.txt | ConvertTo-Base64 | Should -Be $(Get-Content tests/sample-encoded-windows.txt)
+        }
+
+        It "Get-Content tests/sample.txt | ConvertTo-Base64 -> Get-Content tests/sample-encoded-linux.txt" -Skip:(!$IsLinux) {
+            Get-Content tests/sample.txt | ConvertTo-Base64 | Should -Be $(Get-Content tests/sample-encoded-linux.txt)
+        }
     }
     Context 'Function: ConvertFrom-Base64' {
         It "ConvertFrom-Base64 -Base64String 'VGhpc0lzQU5pY2VTdHJpbmc=' -> ThisIsANiceString" {

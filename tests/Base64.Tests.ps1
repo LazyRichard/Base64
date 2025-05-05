@@ -8,12 +8,19 @@
         }
     }
     Context 'Function: ConvertTo-Base64' {
-        It "ConvertTo-Base64 -String 'ThisIsANiceString' -> VGhpc0lzQU5pY2VTdHJpbmc=" {
-            ConvertTo-Base64 -String 'ThisIsANiceString' | Should -Be 'VGhpc0lzQU5pY2VTdHJpbmc='
+        It "ConvertTo-Base64 -InputObject 'ThisIsANiceString' -> VGhpc0lzQU5pY2VTdHJpbmc=" {
+            ConvertTo-Base64 -InputObject 'ThisIsANiceString' | Should -Be 'VGhpc0lzQU5pY2VTdHJpbmc='
         }
 
         It "'Hello World' | ConvertTo-Base64 -> SGVsbG8gV29ybGQ=" {
             'Hello World' | ConvertTo-Base64 | Should -Be 'SGVsbG8gV29ybGQ='
+        }
+
+        It "@('123', '456') | ConvertTo-Base64 -> MTIzDQo0NTY=" -Skip:(!$IsWindows) {
+            @('123', '456') | ConvertTo-Base64 | Should -Be 'MTIzDQo0NTY='
+        }
+        It "@('123', '456') | ConvertTo-Base64 -> MTIzCjQ1Ng==" -Skip:(!$IsLinux) {
+            @('123', '456') | ConvertTo-Base64 | Should -Be 'MTIzCjQ1Ng=='
         }
     }
     Context 'Function: ConvertFrom-Base64' {

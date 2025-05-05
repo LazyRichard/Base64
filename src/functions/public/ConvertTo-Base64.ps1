@@ -36,12 +36,26 @@
             ValueFromPipeline,
             ValueFromPipelineByPropertyName
         )]
-        [string] $String,
+        [object] $InputObject,
 
         # The encoding to use when converting the string to bytes.
         [Parameter()]
         [ValidateSet('UTF8', 'UTF7', 'UTF32', 'ASCII', 'Unicode', 'BigEndianUnicode', 'Latin1')]
         [string] $Encoding = 'UTF8'
     )
-    [Convert]::ToBase64String([System.Text.Encoding]::$Encoding.GetBytes($String))
+
+    begin {
+        $lines = @()
+    }
+
+    process {
+        $lines += $InputObject
+    }
+
+    end {
+        $target = ($lines -Join [Environment]::NewLine)
+        $Bytes = [System.Text.Encoding]::$Encoding.GetBytes($target)
+
+        [System.Convert]::ToBase64String($bytes)
+    }
 }
